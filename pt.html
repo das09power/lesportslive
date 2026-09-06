@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scoreboard Overlay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+        }
+
+        body {
+            background-color: #050b10;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .scoreboard-container {
+            width: 380px;
+            background: #081219;
+            border: 2px solid #005b66;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.2);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .sc-header {
+            display: grid;
+            grid-template-columns: 45px 1fr 100px 50px 60px;
+            background: linear-gradient(90deg, #00363d 0%, #005c66 100%);
+            border-bottom: 2px solid #00bcd4;
+            padding: 6px 0;
+            text-align: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #00e5ff;
+        }
+
+        /* ROWS */
+        .sc-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sc-row {
+            display: grid;
+            grid-template-columns: 45px 1fr 100px 50px 60px;
+            height: 42px;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+            background: #09161e;
+        }
+
+        .sc-row:nth-child(even) {
+            background: #0c1c27;
+        }
+
+        /* Highlighted Row (e.g., Spectated / Custom highlight) */
+        .sc-row.highlight {
+            background: #ff3b00 !important;
+            color: #fff !important;
+        }
+
+        .rank {
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .team-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 10px;
+            overflow: hidden;
+        }
+
+        .team-logo {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+        }
+
+        .team-tag {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* STATUS BARS (4 PLAYERS) */
+        .status-container {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            align-items: center;
+            height: 100%;
+        }
+
+        .status-bar {
+            width: 8px;
+            height: 24px;
+            border-radius: 1px;
+            background-color: #334155; /* Dead/Eliminated default */
+        }
+
+        .status-bar.alive {
+            background-color: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        .status-bar.knocked {
+            background-color: #ef4444;
+            box-shadow: 0 0 8px #ef4444;
+        }
+
+        .status-bar.eliminated {
+            background-color: #475569;
+        }
+
+        /* FIN & PTS */
+        .fin-pts, .total-pts {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .fin-pts {
+            color: #e2e8f0;
+        }
+
+        .total-pts {
+            color: #ffffff;
+        }
+
+        /* FOOTER LEGEND */
+        .sc-footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #04090d;
+            padding: 8px 10px;
+            border-top: 1px solid #005c66;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-box {
+            width: 14px;
+            height: 14px;
+        }
+
+        .legend-box.alive { background: #22c55e; box-shadow: 0 0 5px #22c55e; }
+        .legend-box.knocked { background: #ef4444; box-shadow: 0 0 5px #ef4444; }
+        .legend-box.eliminated { background: #475569; }
+    </style>
+</head>
+<body>
+
+    <div class="scoreboard-container">
+        <!-- HEADER -->
+        <div class="sc-header">
+            <div>#</div>
+            <div style="text-align: left; padding-left: 10px;">TEAMS</div>
+            <div>STATUS</div>
+            <div>FIN</div>
+            <div>PTS</div>
+        </div>
+
+        <!-- LIVE ROWS -->
+        <div class="sc-body" id="scoreboardRows">
+            <!-- Dynamic Data Will Load Here -->
+        </div>
+
+        <!-- FOOTER LEGEND -->
+        <div class="sc-footer">
+            <div class="legend-item">
+                <div class="legend-box alive"></div>
+                <span>ALIVE</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box knocked"></div>
+                <span>KNOCKED</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box eliminated"></div>
+                <span>ELIMINATED</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getStoredTeams() {
+            return JSON.parse(localStorage.getItem("esports_teams") || "[]");
+        }
+
+        async function loadScoreboard() {
+            let teams = [];
+
+            // Fetch from backend server if available, else localStorage
+            try {
+                const res = await fetch('/api/data');
+                if (res.ok) {
+                    const data = await res.json();
+                    teams = data.teams || [];
+                } else {
+                    teams = getStoredTeams();
+                }
+            } catch (e) {
+                teams = getStoredTeams();
+            }
+
+            // Sort teams by Total Points (Descending)
+            teams.sort((a, b) => (Number(b.totalPts) || 0) - (Number(a.totalPts) || 0));
+
+            const container = document.getElementById("scoreboardRows");
+            container.innerHTML = "";
+
+            if (teams.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding:20px; font-size:20px; color:#64748b;">No Teams Available</div>`;
+                return;
+            }
+
+            teams.forEach((t, index) => {
+                const row = document.createElement("div");
+                row.className = `sc-row ${t.isHighlighted ? 'highlight' : ''}`;
+
+                // Status Bar Generation (4 players status)
+                // Status values: 'alive', 'knocked', 'eliminated'
+                let players = t.playersAlive || ['alive', 'alive', 'alive', 'alive'];
+                
+                // Fallback if playersAlive is just a number
+                if (typeof players === 'number') {
+                    let count = players;
+                    players = ['eliminated', 'eliminated', 'eliminated', 'eliminated'];
+                    for (let i = 0; i < count; i++) players[i] = 'alive';
+                }
+
+                let statusHtml = '';
+                for (let i = 0; i < 4; i++) {
+                    let st = players[i] || 'eliminated';
+                    statusHtml += `<div class="status-bar ${st}"></div>`;
+                }
+
+                row.innerHTML = `
+                    <div class="rank">${index + 1}</div>
+                    <div class="team-info">
+                        ${t.logo ? `<img class="team-logo" src="${t.logo}">` : `<i class="fa-solid fa-shield-halved" style="color:#00e5ff; font-size:18px;"></i>`}
+                        <span class="team-tag">${t.shortName || t.name}</span>
+                    </div>
+                    <div class="status-container">
+                        ${statusHtml}
+                    </div>
+                    <div class="fin-pts">${t.finishPts || 0}</div>
+                    <div class="total-pts">${t.totalPts || 0}</div>
+                `;
+
+                container.appendChild(row);
+            });
+        }
+
+        // Auto Refresh every 2 seconds for LIVE updates
+        setInterval(loadScoreboard, 2000);
+        loadScoreboard();
+    </script>
+</body>
+</html>

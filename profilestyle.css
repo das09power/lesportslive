@@ -1,0 +1,358 @@
+/* =========================================
+   RESET
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   BODY
+========================================= */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #1c2c55 0%, #080d19 45%, #050912 100%);
+    color: white;
+    padding: 50px 20px;
+}
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+.page-container {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.header-text h1 {
+    font-size: 32px;
+    margin-bottom: 7px;
+}
+.header-text p {
+    color: #8e9ab2;
+    font-size: 14px;
+}
+
+/* =========================================
+   DASHBOARD BUTTON
+========================================= */
+.dashboard-btn {
+    border: none;
+    outline: none;
+    color: white;
+    background: #4f46e5;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.dashboard-btn:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+}
+.dashboard-btn:active {
+    transform: scale(0.97);
+}
+
+/* =========================================
+   PROFILE CARD
+========================================= */
+.profile-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 45px;
+    background: #111827;
+    border: 1px solid #26334d;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================
+   LEFT SIDE
+========================================= */
+.profile-left {
+    text-align: center;
+    border-right: 1px solid #273149;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =========================================
+   PHOTO CONTAINER (USER)
+========================================= */
+.photo-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.photo-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #5146e5;
+    background: #0b1120;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* =========================================
+   UPLOAD BUTTON
+========================================= */
+.upload-button {
+    background: #202a40;
+    border: 1px solid #36425e;
+    color: #dce3f0;
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+.upload-button:hover {
+    background: #2c3955;
+    border-color: #5146e5;
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   PROFILE PREVIEW
+========================================= */
+.profile-left h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    max-width: 230px;
+    word-break: break-word;
+}
+.profile-left p {
+    color: #8f9ab1;
+    font-size: 14px;
+    max-width: 230px;
+    word-break: break-word;
+}
+
+/* =========================================
+   ORG PHOTO CONTAINER
+========================================= */
+.org-photo-container {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #273149;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.org-photo-container img {
+    width: 110px;
+    height: 110px;
+    border-radius: 15px;
+    object-fit: cover;
+    border: 3px solid #6937ff;
+    background: #0b1120;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* =========================================
+   RIGHT SIDE
+========================================= */
+.profile-right {
+    width: 100%;
+}
+
+/* =========================================
+   INPUT GROUP
+========================================= */
+.input-group {
+    margin-bottom: 22px;
+}
+.input-group label {
+    display: block;
+    color: #d7ddea;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.input-group input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border-radius: 10px;
+    border: 1px solid #303c56;
+    background: #080e1b;
+    color: white;
+    outline: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+.input-group input::placeholder {
+    color: #657089;
+}
+.input-group input:focus {
+    border-color: #5146e5;
+    box-shadow: 0 0 0 3px rgba(81, 70, 229, 0.15);
+}
+
+/* =========================================
+   SAVE BUTTON
+========================================= */
+.save-button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: #4f46e5;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: all 0.2s ease;
+}
+.save-button:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+}
+.save-button:active {
+    transform: scale(0.99);
+}
+.save-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* =========================================
+   SUCCESS & ERROR MESSAGES
+========================================= */
+.success-message {
+    display: none;
+    margin-top: 18px;
+    padding: 13px;
+    text-align: center;
+    border-radius: 9px;
+    background: rgba(22, 163, 74, 0.12);
+    border: 1px solid #16a34a;
+    color: #86efac;
+    font-size: 14px;
+}
+.success-message.show { display: block; }
+
+.error-message {
+    display: none;
+    margin-top: 18px;
+    padding: 13px;
+    text-align: center;
+    border-radius: 9px;
+    background: rgba(220, 38, 38, 0.12);
+    border: 1px solid #dc2626;
+    color: #fca5a5;
+    font-size: 14px;
+}
+.error-message.show { display: block; }
+
+/* =========================================
+   CROP MODAL (WHATSAPP STYLE)
+========================================= */
+.crop-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.crop-modal.show {
+    display: flex;
+}
+.crop-modal-content {
+    background: #111827;
+    border: 1px solid #273149;
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+.crop-modal-content h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #ffffff;
+}
+.crop-container {
+    width: 100%;
+    max-height: 380px;
+    min-height: 250px;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.crop-container img {
+    max-width: 100%;
+    display: block;
+}
+.crop-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+.cancel-crop-btn {
+    background: #273149;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.cancel-crop-btn:hover { background: #344263; }
+
+.apply-crop-btn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+.apply-crop-btn:hover { background: #4338ca; }
+
+/* =========================================
+   MOBILE
+========================================= */
+@media (max-width: 700px) {
+    body { padding: 25px 15px; }
+    .top-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .header-text h1 { font-size: 27px; }
+    .dashboard-btn { width: 100%; text-align: center; }
+    .profile-card { grid-template-columns: 1fr; padding: 25px; gap: 30px; }
+    .profile-left { border-right: none; border-bottom: 1px solid #273149; padding-right: 0; padding-bottom: 30px; }
+    .profile-left h2, .profile-left p { max-width: 100%; }
+}

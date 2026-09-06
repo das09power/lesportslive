@@ -1,0 +1,126 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@loversesports.com",
+      "orgName": "LOVERS ESPORTS"
+    }
+  ],
+  "profile": {
+    "name": "Admin",
+    "email": "admin@loversesports.com",
+    "orgName": "LOVERS ESPORTS",
+    "adminDp": "",
+    "orgLogo": ""
+  },
+  "teams": [
+    {
+      "id": 1,
+      "slot": 1,
+      "name": "WILD FLASH",
+      "shortName": "WF",
+      "logo": "",
+      "playersAlive": [
+        "alive",
+        "alive",
+        "alive",
+        "alive"
+      ],
+      "finishPts": 0,
+      "positionPts": 0,
+      "matchPts": 0,
+      "totalPts": 7
+    },
+    {
+      "id": 2,
+      "slot": 2,
+      "name": "RENTEX ESPORTS",
+      "shortName": "RNTX",
+      "logo": "",
+      "playersAlive": [
+        "alive",
+        "alive",
+        "alive",
+        "alive"
+      ],
+      "finishPts": 0,
+      "positionPts": 0,
+      "matchPts": 0,
+      "totalPts": 2
+    },
+    {
+      "id": 3,
+      "slot": 3,
+      "name": "ORANGUTAN",
+      "shortName": "OG",
+      "logo": "",
+      "playersAlive": [
+        "alive",
+        "alive",
+        "alive",
+        "alive"
+      ],
+      "finishPts": 0,
+      "positionPts": 0,
+      "matchPts": 0,
+      "totalPts": 2
+    },
+    {
+      "id": 4,
+      "slot": 4,
+      "name": "TEAM SOUL",
+      "shortName": "SOUL",
+      "logo": "",
+      "playersAlive": [
+        "alive",
+        "alive",
+        "alive",
+        "alive"
+      ],
+      "finishPts": 0,
+      "positionPts": 0,
+      "matchPts": 0,
+      "totalPts": 2
+    },
+    {
+      "id": 1788710815682,
+      "slot": 6,
+      "name": "555",
+      "shortName": "44",
+      "logo": "",
+      "playersAlive": [
+        "alive",
+        "alive",
+        "alive",
+        "alive"
+      ],
+      "finishPts": 0,
+      "positionPts": 0,
+      "matchPts": 0,
+      "totalPts": 4
+    },
+    {
+      "id": 1788710917804,
+      "slot": 8,
+      "name": "lovo",
+      "shortName": "LOVO",
+      "logo": "",
+      "playersAlive": [
+        "alive",
+        "alive",
+        "alive",
+        "alive"
+      ],
+      "finishPts": 0,
+      "positionPts": 0,
+      "matchPts": 0,
+      "totalPts": 3
+    }
+  ],
+  "matchState": {
+    "currentMatch": 2,
+    "isLive": false,
+    "timerSeconds": 0
+  }
+}

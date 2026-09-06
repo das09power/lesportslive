@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Control - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo"><i class="fa-solid fa-trophy"></i></div>
+            <div class="brand-text">
+                <span class="portal-title">Esports Portal</span>
+                <h3 id="sidebarOrgName">LOVERS ESPORTS</h3>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-link active"><i class="fa-solid fa-border-all"></i><span>Dashboard</span></a>
+            <a href="teams.html" class="nav-link"><i class="fa-solid fa-users"></i><span>Teams</span></a>
+            <a href="live.html" class="nav-link"><i class="fa-solid fa-tower-broadcast"></i><span>Live Control</span><span class="badge-live">LIVE</span></a>
+            <a href="pt.html" class="nav-link"><i class="fa-solid fa-chart-simple"></i><span>Leaderboard</span></a>
+            <a href="profile.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        
+        <!-- HEADER -->
+        <header class="top-bar">
+            <div class="header-title-box">
+                <h1 id="liveMatchTitle">Live Control - Match 03</h1>
+                <span class="status-pill live" id="matchStatusBadge">• LIVE</span>
+            </div>
+
+            <div class="header-right-actions">
+                <button class="btn-reset-match" id="resetDataBtn"><i class="fa-solid fa-rotate-left"></i> Reset Match</button>
+                <div class="user-profile-card">
+                    <div class="avatar-container">A</div>
+                    <div class="user-info">
+                        <h4>Admin</h4>
+                        <span>LOVERS ESPORTS</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- STATS CARDS -->
+        <section class="stats-row">
+            <div class="stat-card">
+                <h2 id="totalTeamsCount">16</h2>
+                <span>TEAMS</span>
+            </div>
+            <div class="stat-card">
+                <h2 id="matchRunningCount">03</h2>
+                <span>MATCH RUNNING</span>
+            </div>
+            <div class="stat-card">
+                <h2 id="totalKillsCount">128</h2>
+                <span>TOTAL KILLS</span>
+            </div>
+            <div class="stat-card">
+                <h2 id="timerDisplay">02:35:45</h2>
+                <span>MATCH TIME</span>
+            </div>
+            
+            <button class="btn-start-match running" id="matchToggleBtn">
+                <i class="fa-solid fa-stop"></i> END MATCH
+            </button>
+        </section>
+
+        <!-- DASHBOARD TABLE -->
+        <section class="table-section">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>TEAM</th>
+                            <th>ALIVE</th>
+                            <th>FINISH PTS</th>
+                            <th>POSITION PTS</th>
+                            <th>MATCH PTS</th>
+                            <th>TOTAL PTS</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teamsTableBody">
+                        <!-- Rendered by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-footer-note">
+                <i class="fa-solid fa-circle-info"></i> Auto ranking is enabled. Teams are sorted by Total PTS (High to Low).
+            </div>
+        </section>
+    </main>
+
+    <!-- TEAM EDIT MODAL WITH LOGO EDIT -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal-card">
+            <h3>Edit Team & Players</h3>
+            <div class="form-group">
+                <label>Team Name</label>
+                <input type="text" id="editTeamName">
+            </div>
+            <div class="form-group">
+                <label>Change Logo</label>
+                <input type="file" id="editTeamLogoFile" accept="image/*" onchange="previewEditLogo(event)">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+                <button class="btn-save" onclick="saveTeamEdit()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

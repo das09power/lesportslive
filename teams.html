@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Setup - Esports Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo"><i class="fa-solid fa-trophy"></i></div>
+            <div class="brand-text">
+                <span class="portal-title">Esports Portal</span>
+                <h3 id="sidebarOrgName">LOVERS ESPORTS</h3>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-link"><i class="fa-solid fa-border-all"></i><span>Dashboard</span></a>
+            <a href="teams.html" class="nav-link active"><i class="fa-solid fa-users"></i><span>Teams</span></a>
+            <a href="pt.html" class="nav-link"><i class="fa-solid fa-chart-simple"></i><span>Leaderboard</span></a>
+            <a href="profile.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <h1>Tournament Team Setup</h1>
+        </header>
+
+        <!-- TEAM ADDITION PANEL WITH LOGO UPLOAD -->
+        <section class="add-team-card">
+            <h3><i class="fa-solid fa-user-plus"></i> Add New Team</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Slot #</label>
+                    <input type="number" id="teamSlot" placeholder="e.g. 1">
+                </div>
+                <div class="form-group">
+                    <label>Team Name</label>
+                    <input type="text" id="teamName" placeholder="e.g. WILD FLASH">
+                </div>
+                <div class="form-group">
+                    <label>Short Name / Tag</label>
+                    <input type="text" id="teamTag" placeholder="e.g. WF">
+                </div>
+                <div class="form-group">
+                    <label>Upload Logo (PNG/JPG)</label>
+                    <input type="file" id="teamLogoFile" accept="image/*" onchange="previewLogo(event)">
+                </div>
+            </div>
+
+            <div class="logo-preview-box" id="logoPreviewContainer" style="display:none;">
+                <span>Selected Logo Preview:</span>
+                <img id="logoPreviewImg" src="" alt="Preview">
+            </div>
+
+            <button class="btn-primary" onclick="handleAddTeam()"><i class="fa-solid fa-plus"></i> Save & Add Team</button>
+        </section>
+
+        <!-- TEAMS MANAGEMENT TABLE -->
+        <section class="table-section" style="margin-top: 24px;">
+            <h3 class="section-heading">Registered Teams</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SLOT</th>
+                            <th>LOGO</th>
+                            <th>TEAM NAME</th>
+                            <th>TAG</th>
+                            <th>TOTAL PTS</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teamsSetupTable">
+                        <!-- Dynamic Sync -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let base64Logo = "";
+
+        function previewLogo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    base64Logo = e.target.result;
+                    document.getElementById("logoPreviewImg").src = base64Logo;
+                    document.getElementById("logoPreviewContainer").style.display = "flex";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function fetchTeams() {
+            try {
+                const res = await fetch('/api/data');
+                const data = await res.json();
+                renderTable(data.teams || []);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function renderTable(teams) {
+            const tbody = document.getElementById("teamsSetupTable");
+            tbody.innerHTML = "";
+            teams.sort((a,b) => Number(a.slot) - Number(b.slot));
+
+            teams.forEach(t => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>#${t.slot}</td>
+                    <td>
+                        <div class="team-badge-icon">
+                            ${t.logo ? `<img src="${t.logo}">` : t.shortName || t.name.charAt(0)}
+                        </div>
+                    </td>
+                    <td><strong>${t.name}</strong></td>
+                    <td><span class="tag-badge">${t.shortName || '-'}</span></td>
+                    <td style="color:#a78bfa; font-weight:800;">${t.totalPts || 0}</td>
+                    <td>
+                        <button class="btn-delete" onclick="deleteTeam(${t.id})"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function handleAddTeam() {
+            const slot = document.getElementById("teamSlot").value;
+            const name = document.getElementById("teamName").value.trim();
+            const tag = document.getElementById("teamTag").value.trim();
+
+            if (!name) return alert("Kripya Team Name likhein!");
+
+            const payload = {
+                slot: slot,
+                name: name,
+                shortName: tag,
+                logo: base64Logo
+            };
+
+            const res = await fetch('/api/teams/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                alert("Team Successfully Add ho gayi hai!");
+                document.getElementById("teamSlot").value = "";
+                document.getElementById("teamName").value = "";
+                document.getElementById("teamTag").value = "";
+                document.getElementById("teamLogoFile").value = "";
+                document.getElementById("logoPreviewContainer").style.display = "none";
+                base64Logo = "";
+                renderTable(data.teams);
+            }
+        }
+
+        async function deleteTeam(id) {
+            if (confirm("Kya aap is team ko delete karna chahte hain?")) {
+                const res = await fetch('/api/teams/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+                const data = await res.json();
+                renderTable(data.teams);
+            }
+        }
+
+        fetchTeams();
+    </script>
+</body>
+</html>

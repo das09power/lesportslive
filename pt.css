@@ -1,0 +1,473 @@
+/* =========================================
+   BASIC RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #050505;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   POSTER
+   1080 x 1350
+========================================= */
+
+.poster {
+    position: relative;
+
+    width: 1080px;
+    height: 1350px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 35%,
+            rgba(170, 0, 0, 0.65) 0%,
+            rgba(90, 0, 0, 0.85) 30%,
+            rgba(35, 0, 0, 0.96) 65%,
+            #050505 100%
+        );
+
+    color: white;
+}
+
+
+/* =========================================
+   DARK RED TEXTURE
+========================================= */
+
+.poster::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 0%,
+            rgba(255, 0, 0, 0.10) 25%,
+            transparent 50%,
+            rgba(255, 20, 20, 0.08) 75%,
+            transparent 100%
+        );
+
+    opacity: 0.8;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   RED ABSTRACT SHAPES
+========================================= */
+
+.red-shape {
+    position: absolute;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 0, 0, 0.30),
+        rgba(90, 0, 0, 0.05)
+    );
+
+    filter: blur(1px);
+
+    transform: rotate(-20deg);
+
+    pointer-events: none;
+}
+
+
+.shape-1 {
+    width: 850px;
+    height: 190px;
+
+    top: 170px;
+    left: -250px;
+
+    border-radius: 50%;
+
+    opacity: 0.7;
+}
+
+
+.shape-2 {
+    width: 900px;
+    height: 180px;
+
+    top: 350px;
+    right: -350px;
+
+    border-radius: 50%;
+
+    transform: rotate(25deg);
+
+    opacity: 0.65;
+}
+
+
+.shape-3 {
+    width: 1000px;
+    height: 220px;
+
+    bottom: 100px;
+    left: -400px;
+
+    border-radius: 50%;
+
+    transform: rotate(-15deg);
+
+    opacity: 0.6;
+}
+
+
+/* =========================================
+   RED GLOW EFFECTS
+========================================= */
+
+.bg-glow {
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    pointer-events: none;
+}
+
+
+.glow-1 {
+    width: 500px;
+    height: 500px;
+
+    top: -150px;
+    left: -150px;
+
+    background: rgba(180, 0, 0, 0.45);
+}
+
+
+.glow-2 {
+    width: 450px;
+    height: 450px;
+
+    top: 250px;
+    right: -150px;
+
+    background: rgba(210, 0, 0, 0.35);
+}
+
+
+.glow-3 {
+    width: 600px;
+    height: 300px;
+
+    bottom: -100px;
+    left: 200px;
+
+    background: rgba(120, 0, 0, 0.35);
+}
+
+
+/* =========================================
+   ORGANIZATION NAME
+========================================= */
+
+.organization {
+    position: absolute;
+
+    top: 48px;
+    left: 0;
+    right: 0;
+
+    text-align: center;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #ffffff;
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   PRESENTS
+========================================= */
+
+.presents {
+    position: absolute;
+
+    top: 88px;
+    left: 0;
+    right: 0;
+
+    text-align: center;
+
+    font-size: 17px;
+    font-weight: 400;
+
+    letter-spacing: 7px;
+
+    color: rgba(255, 255, 255, 0.55);
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   TOURNAMENT ROUND
+========================================= */
+
+.round {
+    position: absolute;
+
+    top: 27px;
+    right: 42px;
+
+    font-size: 17px;
+    font-weight: 500;
+
+    letter-spacing: 0.5px;
+
+    color: #ffffff;
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   TOURNAMENT NAME
+========================================= */
+
+.tournament-name {
+    position: absolute;
+
+    top: 155px;
+
+    left: 35px;
+    right: 35px;
+
+    text-align: center;
+
+    font-size: 74px;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: 1px;
+
+    color: #00ffff;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 4px rgba(0, 255, 255, 0.5),
+        0 0 18px rgba(0, 255, 255, 0.12);
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   MAIN DECORATIVE FRAME
+========================================= */
+
+.main-frame {
+    position: absolute;
+
+    top: 405px;
+    left: 105px;
+
+    width: 900px;
+    height: 795px;
+
+    border: 2px solid rgba(0, 255, 255, 0.75);
+
+    clip-path: polygon(
+        6% 0%,
+        100% 0%,
+        100% 82%,
+        94% 88%,
+        94% 100%,
+        0% 100%,
+        0% 10%
+    );
+
+    z-index: 5;
+}
+
+
+/* =========================================
+   INNER FRAME
+========================================= */
+
+.frame-inner {
+    position: absolute;
+
+    top: 27px;
+    left: 27px;
+
+    width: calc(100% - 54px);
+    height: calc(100% - 54px);
+
+    border: 9px solid #00ffff;
+
+    clip-path: polygon(
+        6% 0%,
+        100% 0%,
+        100% 82%,
+        94% 88%,
+        94% 100%,
+        0% 100%,
+        0% 10%
+    );
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35, 0, 0, 0.85),
+            rgba(5, 0, 0, 0.92)
+        );
+
+    box-shadow:
+        0 0 15px rgba(0, 255, 255, 0.15);
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   FRAME INNER CYAN ACCENT
+========================================= */
+
+.frame-inner::before {
+    content: "";
+
+    position: absolute;
+
+    top: -2px;
+    right: -2px;
+
+    width: 430px;
+    height: 3px;
+
+    background: #00ffff;
+
+    box-shadow:
+        0 0 12px rgba(0, 255, 255, 0.7);
+}
+
+
+/* =========================================
+   EMPTY CONTENT AREA
+========================================= */
+
+.content-area {
+    position: absolute;
+
+    inset: 40px;
+
+    border: 1px solid rgba(255, 0, 0, 0.08);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 0, 0, 0.02),
+            transparent 40%,
+            rgba(255, 0, 0, 0.03)
+        );
+}
+
+
+/* =========================================
+   BOTTOM LINE
+========================================= */
+
+.bottom-line {
+    position: absolute;
+
+    left: 105px;
+    right: 105px;
+
+    bottom: 70px;
+
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    z-index: 4;
+}
+
+
+/* =========================================
+   BOTTOM GLOW
+========================================= */
+
+.bottom-glow {
+    position: absolute;
+
+    width: 500px;
+    height: 120px;
+
+    left: 50%;
+    bottom: -70px;
+
+    transform: translateX(-50%);
+
+    background: rgba(255, 0, 0, 0.20);
+
+    filter: blur(70px);
+}
+
+
+/* =========================================
+   RESPONSIVE PREVIEW
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .poster {
+        transform-origin: top center;
+        transform: scale(
+            calc(100vw / 1080)
+        );
+    }
+
+    body {
+        min-height: calc(
+            1350px * (100vw / 1080)
+        );
+    }
+}
